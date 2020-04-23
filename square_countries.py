@@ -41,7 +41,7 @@ def init_figure():
 def country_info ():
     country_name , n_dots = init_country()
     #reading file & getting country data
-    countries = gpd.read_file('/home/splinter/Documents/Guminskii/countries.geojson')
+    countries = gpd.read_file('/home/splinter/Documents/Operations_Research/countries.geojson')
     country_data = countries[countries.ADMIN == country_name]
     #for reusing dots-function
     figure = country_data
