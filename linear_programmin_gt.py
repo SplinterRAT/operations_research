@@ -15,21 +15,6 @@ def w_scipy ():
 def w_out_scipy():
     class Simplex(object):
         def __init__(self, num_vars, constraints, objective_function):
-            """
-            num_vars: Number of variables
-            equations: A list of strings representing constraints
-            each variable should be start with x followed by a underscore
-            and a number
-            eg of constraints
-            ['1x_1 + 2x_2 >= 4', '2x_3 + 3x_1 <= 5', 'x_3 + 3x_2 = 6']
-            Note that in x_num, num should not be more than num_vars.
-            Also single spaces should be used in expressions.
-            objective_function: should be a tuple with first element
-            either 'min' or 'max', and second element be the equation
-            eg 
-            ('min', '2x_1 + 4x_3 + 5x_2')
-            For solution finding algorithm uses two-phase simplex method
-            """
             self.num_vars = num_vars
             self.constraints = constraints
             self.objective = objective_function[0]
@@ -295,9 +280,8 @@ def transport_problem():
     mass4 = (x[0] + x[3] + x[6] == 20)
     mass5 = (x[1] +x[4] + x[7] == 45)
     mass6 = (x[2] + x[5] + x[8] == 30)
-    mass7 = (x[1] == 30)
     x_non_negative = (x >= 0)    
-    problem =op(z,[mass1,mass2,mass3,mass4 ,mass5,mass6, mass7,x_non_negative])
+    problem =op(z,[mass1,mass2,mass3,mass4 ,mass5, mass6, x_non_negative])
     problem.solve(solver='glpk')  
     print("Result:")
     for i in x.value:
@@ -314,11 +298,18 @@ def game_theory():
     rps = nash.Game(A, B)
     print(rps)
     #utility of a pair strategies
-    sigma_c = [1 / 2, 1 / 2, 0]
-    sigma_r = [0, 1 / 2, 1 / 2]
+    sigma_c = [1 / 3, 1 / 3, 1/3]
+    sigma_r = [1 / 3, 1 / 3, 1 / 3]
     print(rps[sigma_r, sigma_c])
     #Nash equilibria
     eqs = rps.support_enumeration()
     print(list(eqs))
+    #prisoners dillema
+    P1=np.array([[3,0],[4,1]])
+    P2=np.array([[3,4],[0,1]])
+    prisoner_dilemma=nash.Game(P1,P2)
+    print(prisoner_dilemma)
+    eqs = prisoner_dilemma.support_enumeration()
+    print(eqs)
     return
-transport_problem()
+game_theory()
