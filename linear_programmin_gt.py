@@ -298,8 +298,8 @@ def game_theory():
     rps = nash.Game(A, B)
     print(rps)
     #utility of a pair strategies
-    sigma_c = [1 / 3, 1 / 3, 1/3]
-    sigma_r = [1 / 3, 1 / 3, 1 / 3]
+    sigma_c = [1 / 2, 1 / 2, 0]
+    sigma_r = [0 , 1 / 2, 1 / 2]
     print(rps[sigma_r, sigma_c])
     #Nash equilibria
     eqs = rps.support_enumeration()

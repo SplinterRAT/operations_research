@@ -45,6 +45,9 @@ def country_info ():
     country_data = countries[countries.ADMIN == country_name]
     #for reusing dots-function
     figure = country_data
+    #check the area
+    real_area = figure.area
+    print (real_area)
     #parametrs of rectangle
     minmax = country_data.total_bounds
     minx , miny , maxx , maxy = minmax[0] , minmax[1] , minmax[2] , minmax[3]
@@ -81,9 +84,10 @@ def country_info ():
     print (fig_p)
     total_p = rect_p + fig_p
     square = (fig_p / total_p) * (param_width * param_height)
-    #square_real = square / 0.000187638
+    #real square
+    square_real = round((square * 8195.9), 3)
     plt.title(country_name, fontsize=19)
-    plt.suptitle('S = ' + str(square), fontsize=12)
+    plt.suptitle('S = ' + str(square_real) + 'km2', fontsize=12)
     #drawing shape
     ax.add_patch(rect)
     country_data.boundary.plot(ax=ax)
